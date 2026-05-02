@@ -1,0 +1,623 @@
+/*
+  Fichier CSS global du projet.
+  Contient les variables de thème, le style des layouts principaux, et les effets de focus.
+*/
+:root {
+    --bg-start: #0b183d;
+    --bg-end: #08111f;
+    --panel: rgba(255,255,255,0.92);
+    --panel-soft: rgba(255,255,255,0.18);
+    --border: rgba(255,255,255,0.12);
+    --primary: #5d8cff;
+    --primary-soft: rgba(93,140,255,0.15);
+    --text-dark: #17233a;
+    --text-light: #f8fafc;
+    --shadow: 0 28px 80px rgba(3, 12, 42, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at top left, rgba(93,140,255,0.24), transparent 28%),
+                linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    color: var(--text-light);
+}
+
+body.loaded .page-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 28px 24px 40px;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.site-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.site-title {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+}
+
+.site-subtitle {
+    margin: 8px 0 0;
+    color: rgba(248,250,252,0.78);
+    max-width: 620px;
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.nav-card,
+.btn-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 22px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 24px rgba(3, 12, 42, 0.15);
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nav-card:hover,
+.btn-link:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.34);
+    border-color: rgba(255, 255, 255, 0.42);
+    box-shadow: 0 14px 40px rgba(9, 24, 82, 0.22);
+    color: #fff;
+}
+
+.nav-card:focus-visible,
+.btn-link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.55), 0 14px 40px rgba(9, 24, 82, 0.22);
+}
+
+/* Sur fond clair (.panel) : les anciennes cartes transparentes disparaissaient */
+.panel .nav-card {
+    background: linear-gradient(145deg, #4f7dff 0%, #3869f5 55%, #2d5ae8 100%);
+    color: #fff;
+    border: 1px solid rgba(37, 99, 235, 0.65);
+    box-shadow: 0 12px 32px rgba(47, 96, 246, 0.38);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.panel .nav-card:hover {
+    background: linear-gradient(145deg, #6b92ff 0%, #4f7dff 50%, #3869f5 100%);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 16px 44px rgba(47, 96, 246, 0.48);
+    color: #fff;
+}
+
+.panel .nav-card:focus-visible {
+    box-shadow: 0 0 0 3px rgba(93, 140, 255, 0.65), 0 16px 44px rgba(47, 96, 246, 0.45);
+}
+
+.panel,
+.card,
+fieldset {
+    background: var(--panel);
+    color: var(--text-dark);
+    border: 1px solid rgba(18, 39, 78, 0.14);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+.panel {
+    padding: 28px;
+}
+
+.card {
+    padding: 22px;
+}
+
+form {
+    display: grid;
+    gap: 16px;
+}
+
+.form-field {
+    display: grid;
+    gap: 8px;
+}
+
+label {
+    font-size: 0.95rem;
+    color: #2d3a57;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select {
+    width: 100%;
+    border: 1px solid rgba(18,39,78,0.16);
+    border-radius: 14px;
+    background: #fff;
+    color: #1d2a45;
+    padding: 14px 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Champ mot de passe + bouton œil : une seule « capsule » en flex (pas de position absolute). */
+.password-field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid rgba(18, 39, 78, 0.16);
+    border-radius: 14px;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    gap: 0;
+    padding: 0 6px 0 0;
+}
+
+.password-field:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(93, 140, 255, 0.14);
+}
+
+.password-field input[type="password"],
+.password-field input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    margin: 0;
+    border: none;
+    border-radius: 14px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 14px 10px 14px 16px;
+    background: transparent;
+    box-shadow: none;
+}
+
+.password-field input[type="password"]:focus,
+.password-field input[type="text"]:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.password-toggle {
+    flex: 0 0 auto;
+    position: static;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3d5285;
+    padding: 0;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.password-toggle:hover {
+    background: rgba(93, 140, 255, 0.14);
+    color: var(--primary);
+}
+
+.password-toggle:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(93, 140, 255, 0.35);
+}
+
+.password-toggle svg {
+    flex-shrink: 0;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(93,140,255,0.14);
+}
+
+button:not(.password-toggle),
+input[type="submit"],
+.btn {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 16px;
+    padding: 14px 24px;
+    background: linear-gradient(145deg, #4f7dff 0%, #3869f5 55%, #2d5ae8 100%);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 10px 28px rgba(47, 96, 246, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+}
+
+button:not(.password-toggle):hover,
+input[type="submit"]:hover,
+.btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 16px 40px rgba(47, 96, 246, 0.45);
+}
+
+button:not(.password-toggle):focus-visible,
+input[type="submit"]:focus-visible,
+.btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(93, 140, 255, 0.55), 0 16px 40px rgba(47, 96, 246, 0.4);
+}
+
+button:not(.password-toggle).pressed,
+input[type="submit"].pressed,
+.btn.pressed,
+.nav-card.pressed {
+    transform: scale(0.98);
+    opacity: 0.94;
+}
+
+.message {
+    padding: 16px 18px;
+    border-radius: 18px;
+    color: #102044;
+    font-weight: 600;
+    animation: slideIn 0.4s ease;
+}
+
+.message.success {
+    background: #dff4dd;
+    border: 1px solid #83c05a;
+}
+
+.message.error {
+    background: #ffe8e8;
+    border: 1px solid #e16969;
+}
+
+.message.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: rgba(255,255,255,0.95);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+th, td {
+    padding: 16px 18px;
+    text-align: left;
+    border-bottom: 1px solid rgba(18,39,78,0.08);
+}
+
+th {
+    background: rgba(248,250,252,0.9);
+    color: #243456;
+    font-weight: 700;
+}
+
+tbody tr:hover {
+    background: rgba(93,140,255,0.08);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.inline-form {
+    display: inline;
+    margin: 0;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: var(--primary);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+}
+
+.link-button:hover {
+    opacity: 0.85;
+}
+
+.page-title {
+    margin: 0 0 12px;
+    font-size: clamp(1.75rem, 2.5vw, 2.4rem);
+}
+
+.panel .doc-subheading {
+    margin: 20px 0 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #243456;
+}
+
+.panel .doc-subheading:first-of-type {
+    margin-top: 0;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.card-grid {
+    display: grid;
+    gap: 18px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+}
+
+.summary-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 16px;
+    border-radius: 20px;
+    background: linear-gradient(160deg, rgba(93, 140, 255, 0.12), rgba(255, 255, 255, 0.95));
+    border: 1px solid rgba(18, 39, 78, 0.1);
+    text-align: center;
+    gap: 8px;
+}
+
+.summary-card strong {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: #1a2b52;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.summary-card span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(26, 43, 82, 0.72);
+}
+
+.finance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+}
+
+.finance-card {
+    padding: 18px 20px;
+    border-radius: 18px;
+    background: rgba(248, 250, 252, 0.95);
+    border: 1px solid rgba(18, 39, 78, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.finance-card-accent {
+    background: linear-gradient(145deg, rgba(93, 140, 255, 0.14), rgba(255, 255, 255, 0.96));
+    border-color: rgba(93, 140, 255, 0.28);
+}
+
+.finance-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgba(26, 43, 82, 0.65);
+}
+
+.finance-value {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #1a2b52;
+    letter-spacing: -0.02em;
+}
+
+.filter-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    margin-bottom: 22px;
+}
+
+.filter-toolbar .form-field {
+    min-width: 140px;
+    flex: 0 1 200px;
+}
+
+.filter-toolbar-action {
+    flex: 0 0 auto;
+}
+
+.filter-toolbar-action input[type="submit"] {
+    margin-top: 0;
+}
+
+.small-note {
+    color: rgba(17,30,60,0.7);
+}
+
+.login-register-hint {
+    margin: 18px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid rgba(18,39,78,0.1);
+    font-size: 0.95rem;
+    color: rgba(23,35,58,0.88);
+}
+
+.login-help-hint {
+    margin: 14px 0 0;
+    font-size: 0.88rem;
+    color: rgba(23,35,58,0.78);
+    line-height: 1.45;
+}
+
+fieldset.password-reset-fieldset {
+    border: 1px solid rgba(18,39,78,0.14);
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin: 8px 0 0;
+    display: grid;
+    gap: 14px;
+}
+
+fieldset.password-reset-fieldset legend {
+    padding: 0 8px;
+    font-weight: 700;
+    color: #243456;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.connect-new-account-form {
+    margin-top: 18px;
+}
+
+.connect-new-account-form .btn {
+    width: auto;
+}
+
+/* Bandeau d’accueil (toujours visible, pas de disparition automatique) */
+.welcome-banner {
+    margin-bottom: 28px;
+    padding: 26px 28px;
+    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(93, 140, 255, 0.28), rgba(255, 255, 255, 0.07));
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 18px 56px rgba(3, 12, 42, 0.28);
+}
+
+.welcome-banner-status {
+    margin: 0 0 10px;
+    font-size: 0.92rem;
+    letter-spacing: 0.03em;
+    color: rgba(248, 250, 252, 0.88);
+}
+
+.welcome-banner-lead {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(248, 250, 252, 0.75);
+}
+
+.welcome-banner-name {
+    margin: 0 0 14px;
+    font-size: clamp(1.65rem, 4vw, 2.35rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.welcome-given {
+    color: #eef2ff;
+    font-weight: 600;
+}
+
+.welcome-name-sep::before {
+    content: "\00a0·\00a0";
+    font-weight: 400;
+    opacity: 0.65;
+}
+
+.welcome-family {
+    color: #fff;
+}
+
+.welcome-fullname {
+    color: #fff;
+}
+
+.welcome-banner-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 0.95rem;
+    color: rgba(248, 250, 252, 0.78);
+}
+
+.welcome-meta-item strong {
+    color: rgba(248, 250, 252, 0.95);
+    font-weight: 700;
+}
+
+.welcome-login-code {
+    padding: 2px 8px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 0.9em;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 720px) {
+    .page-container { padding: 20px 18px 32px; }
+    th, td { padding: 14px 12px; }
+    .site-header { flex-direction: column; align-items: stretch; }
+}

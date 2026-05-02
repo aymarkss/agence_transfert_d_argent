@@ -1,0 +1,7 @@
+﻿"Date et heure";Événement;"ID Transaction";Type;Montant;Frais;"ID Client";"Nom Client";"ID Réseau";"Nom Réseau";"ID Agent";"Nom Agent"
+"2026-05-02 04:10:32";création;3;depot;1000000,00;0,00;1;Tendo;3;MTN;5;"Traore Doyo Moctar"
+"2026-05-02 04:11:15";création;4;depot;1000000,00;0,00;1;Tendo;1;Wave;5;"Traore Doyo Moctar"
+"2026-05-02 04:37:37";suppression;4;depot;1000000,00;0,00;1;Tendo;1;Wave;5;"Traore Doyo Moctar"
+"2026-05-02 04:37:39";suppression;3;depot;1000000,00;0,00;1;Tendo;3;MTN;5;"Traore Doyo Moctar"
+"2026-05-02 04:37:41";suppression;2;depot;100000,00;0,00;1;Tendo;2;Orange;5;"Traore Doyo Moctar"
+"2026-05-02 04:37:44";suppression;1;depot;100000,00;0,00;1;Tendo;2;Orange;5;"Traore Doyo Moctar"

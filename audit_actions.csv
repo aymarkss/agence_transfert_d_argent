@@ -1,0 +1,2 @@
+datetime,action,table,record_id,details,agent_id,login,ip,user_agent
+2026-05-02 04:52:12,login_success,agents,,Connexion réussie,3,oualiy8295,::1,Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
